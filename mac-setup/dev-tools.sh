@@ -18,6 +18,7 @@ if prompt_yes_no "java"; then
     sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
 fi
 
+# Installs the C++ compiler and necessary packages using Homebrew, creates a directory and downloads a header file from GitHub. 
 if prompt_yes_no "cpp"; then
     echo "Installing cpp"
     brew install gcc
