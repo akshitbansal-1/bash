@@ -85,6 +85,13 @@ if prompt_yes_no "vscode"; then
     brew install --cask visual-studio-code
 fi
 
+
+if prompt_yes_no "Elasticsearch"; then
+    echo "Installing elasticsearch"
+    brew tap elastic/tap
+    brew install elastic/tap/elasticsearch-full
+fi
+
 if prompt_yes_no "postman"; then
     echo "Installing postman"
     brew install --cask postman

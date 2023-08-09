@@ -10,7 +10,7 @@ kafka-consumer-groups --botstrap-server localhost:9092 --group mygroup \
 # --dry-run flag will not set and will show the new state
 
 # to execute
-kafka-consumer-groups --botstrap-server localhost:9092 --group mygroup \
---reset-offsets --to-earliest --topic first-topic --execute
+kafka-consumer-groups --bootstrap-server localhost:9092 --group shorturl \
+--reset-offsets --to-earliest --topic url-ids --execute
 
 

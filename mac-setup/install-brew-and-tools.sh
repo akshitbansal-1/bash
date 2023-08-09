@@ -14,13 +14,14 @@ fi
 
 if prompt_yes_no "zsh"; then
     echo "Installing zsh"
-    brew install zsh
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
     chsh -s /opt/homebrew/bin/zsh
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
     eval "$(/opt/homebrew/bin/brew shellenv)"
 #    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    sed -i -e "s/plugins=(git)/plugins=(git zsh-autosuggestions sudo google copydir copyfile copybuffer jsontools)/" ~/.zshrc
+    sed -i -e "s/plugins=(git)/plugins=(git zsh-autosuggestions sudo copyfile copybuffer jsontools)/" ~/.zshrc
 fi
 
 if prompt_yes_no "wget"; then
