@@ -11,3 +11,10 @@ prompt_yes_no() {
                 ;;
         esac
 }
+
+arr=()
+print_and_clear() {
+    clear;
+    arr+=("Installed $1")
+    for i in "${arr[@]}"; do echo "$i" ; done
+}

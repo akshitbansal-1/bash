@@ -12,8 +12,9 @@ if prompt_yes_no "docker"; then
     brew install --cask docker
     export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/" >> ~/.zshrc
     open -a Docker
-    sleep 15
+    sleep 15 # wait for docker to start
     docker run -d hello-world &
+    print_and_clear "docker"
 fi
 
 if prompt_yes_no "k8s"; then
@@ -21,4 +22,5 @@ if prompt_yes_no "k8s"; then
     brew install kubectl
     brew install minikube
     minikube start
+    print_and_clear "k8s"
 fi
