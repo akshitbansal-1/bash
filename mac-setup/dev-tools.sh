@@ -91,6 +91,12 @@ if prompt_yes_no "postgresql"; then
     print_and_clear "postgresql"
 fi
 
+if prompt_yes_no "kafka"; then
+    echo "Installing kafka"
+    brew install kafka
+    print_and_clear "kafka"
+fi
+
 if prompt_yes_no "postgresql-pgadmin"; then
     echo "Installing pgadmin"
     brew install --cask pgadmin4
