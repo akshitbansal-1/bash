@@ -11,12 +11,13 @@ check_sudo_permissions() {
 
 # check_sudo_permissions
 
-source install-brew-and-tools.sh
-source docker-k8s.sh
-source dev-tools.sh
+source tools.sh
 
 
-echo "\n\n\n\nYou can install other commands/apps through their website as well"
+echo
+echo
+echo
+echo "You can install other commands/apps through their website"
 echo "1. Install slack from app store"
 echo "2. Install chrome from: https://www.google.com/chrome"
 echo "3. Install discord from: https://discord.com/download"
