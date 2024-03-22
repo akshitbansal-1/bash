@@ -23,9 +23,12 @@ prompts=("Brew needs to be installed to download the software. Install Brew?" "i
 # Initialize an array to store user responses
 responses=()
 
+echo "Enter your password: "
+sudo echo
+
 # Function to install Brew
 install_brew() {
-    bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo | bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # echo to mimic an enter
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zprofile
     eval "$(/opt/homebrew/bin/brew shellenv)"
     echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.bashrc
@@ -38,30 +41,35 @@ install_iterm2() {
     print_and_clear "iterm2"
 }
 
-# Function to install Zsh
-install_zsh() {
-    echo "Installing Zsh"
+install_zsh_bg() {
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
     echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
-    chsh -s /opt/homebrew/bin/zsh
+    # chsh -s /opt/homebrew/bin/zsh
     (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> ~/.zshrc
     eval "$(/opt/homebrew/bin/brew shellenv)"
     sed -i -e "s/plugins=(git)/plugins=(git zsh-autosuggestions sudo copyfile copybuffer jsontools)/" ~/.zshrc
-    print_and_clear "zsh"
+    exit
+}
+
+# Function to install Zsh
+install_zsh() {
+    echo "Installing Zsh"
+    install_zsh_bg &
 }
 
 # Function to install Clipy
 install_clipy() {
     echo "Installing Clipy - clipboard history tool"
     brew install clipy
+    open -a /Applications/Clipy.app/
     print_and_clear "clipy"
 }
 
 # Function to install Rosetta
 install_rosetta() {
     echo "Installing Rosetta to run Intel-compatible softwares"
-    softwareupdate --install-rosetta
+    echo "A" | softwareupdate --install-rosetta
     print_and_clear "rosetta"
 }
 
@@ -71,7 +79,8 @@ install_docker() {
     brew install --cask docker
     export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/" >> ~/.zshrc
     open -a Docker
-    sleep 15 # wait for docker to start
+    echo "Waiting for docker to start...."
+    sleep 25 # wait for docker to start
     docker run -d hello-world &
     print_and_clear "docker"
 }
@@ -119,7 +128,7 @@ install_cpp() {
 
 # Function to install MongoDB
 install_mongo() {
-    echo "Installing MongoDB"
+    echo "Installing MongoDB 6.0"
     brew tap mongodb/brew
     brew install mongodb-community@6.0
     brew services start mongodb-community@6.0
@@ -130,7 +139,7 @@ install_mongo() {
 install_python() {
     echo "Installing Python"
     brew install python3
-    print_and_clear "python"
+    print_and_clear "python3"
 }
 
 # Function to install Node.js and NVM
