@@ -4,7 +4,7 @@
 ################ START SERVER ###################
 
 # create a random uuid for your cluster
-KAFKA_CLUSTER_ID="$(bin/kafka-storage.sh random-uuid)"
+KAFKA_CLUSTER_ID="$(bin/kafka-storage random-uuid)"
 # get the random uuid used in your config file
 kafka-storage format -t $KAFKA_CLUSTER_ID -c /opt/homebrew/etc/kafka/kraft/server.properties
 
